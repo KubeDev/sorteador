@@ -27,11 +27,11 @@ func main() {
 	fmt.Println("Sorteando...")
 	time.Sleep(time.Duration(delay) * time.Second)
 
-	numeroSorteado := rand.Intn(numMaximo-1) + 1
+	numeroSorteado := rand.Intn(numMaximo + 1)
 	if numeroSorteado == numEscolhido {
-		fmt.Printf("O valor sorteado foi %d e você escolheu %d. Parabéns !!!\n", numeroSorteado, *escolhido)
+		fmt.Printf("O valor sorteado foi %d e você escolheu %d. Parabéns !!!\n", numeroSorteado, numEscolhido)
 	} else {
-		fmt.Printf("O valor sorteado foi %d e você escolheu %d. Tenta de novo...\n", numeroSorteado, *escolhido)
+		fmt.Printf("O valor sorteado foi %d e você escolheu %d. Tenta de novo...\n", numeroSorteado, numEscolhido)
 		os.Exit(1)
 	}
 }
