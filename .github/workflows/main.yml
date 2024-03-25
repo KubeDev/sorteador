@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Docker Login
+        uses: docker/login-action@v1.10.0
+        with:
+          username: ${{ secrets.DOCKER_GLOBAL_USER }}
+          password: ${{ secrets.DOCKER_GLOBAL_PWD }}
+          
+      - name: Docker Build and Push
+        uses: docker/build-push-action@v2.7.0
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: |
+            fabricioveronez/sorteador:latest
+            fabricioveronez/sorteador:v1
+            kubedevio/sorteador:latest
+            kubedevio/sorteador:v1
