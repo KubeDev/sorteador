@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"math/rand"
 	"os"
@@ -11,14 +10,8 @@ import (
 
 func main() {
 
-	escolhido := flag.Int("c", 1, "Número escolhido")
-	maximo := flag.Int("m", 1, "Número máximo pra ser sorteado")
-	flag.Parse()
-
-	if *escolhido > *maximo {
-		fmt.Println("O número escolhido não pode ser maior que o número máximo de sorteio.")
-		os.Exit(1)
-	}
+	numEscolhido, _ := strconv.Atoi(os.Getenv("NUM_ESCOLHIDO"))
+	numMaximo, _ := strconv.Atoi(os.Getenv("NUM_MAXIMO"))
 
 	delayStr := os.Getenv("DELAY_SORTEIO")
 	if delayStr == "" {
@@ -34,8 +27,8 @@ func main() {
 	fmt.Println("Sorteando...")
 	time.Sleep(time.Duration(delay) * time.Second)
 
-	numeroSorteado := rand.Intn(*maximo-1) + 1
-	if numeroSorteado == *escolhido {
+	numeroSorteado := rand.Intn(numMaximo-1) + 1
+	if numeroSorteado == numEscolhido {
 		fmt.Printf("O valor sorteado foi %d e você escolheu %d. Parabéns !!!\n", numeroSorteado, *escolhido)
 	} else {
 		fmt.Printf("O valor sorteado foi %d e você escolheu %d. Tenta de novo...\n", numeroSorteado, *escolhido)
